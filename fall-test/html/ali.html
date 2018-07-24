@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <title>today app</title>
+    <body>
+        <div id="box" class="con header"> 
+            <li id="one" class="hh">one</li>
+            <li class="two">two</li>
+            <li>three</li>
+        </div>
+    </body>
+    <script>
+        function findExactDom(obj){
+            var nodeLocal = "";
+            var textNode = obj.nodeName.toLowerCase();           
+            var parent = obj.parentNode;
+            while(parent.nodeName.toLowerCase()!="#document"){
+                nodeLocal =','+ parent.nodeName.toLowerCase()+getAttr(parent) + nodeLocal;
+                parent = parent.parentNode;
+            }                                 
+            var attrStr = getAttr(obj);
+            nodeLocal = nodeLocal+','+textNode+attrStr;
+            return nodeLocal;
+        }
+        // function sysAttributes(attr) {
+        //     var attrStr = "";
+        //     for (let i = 0; i < attr.length; i++) {
+        //         if (attr[i].nodeName === 'id') {
+        //             attrStr = attrStr + '#'+attr[i].nodeValue;
+        //         }
+        //         if (attr[i].nodeName ==='class') {
+        //             attrStr = attrStr + '.'+attr[i].nodeValue;
+        //         }
+        //     }
+        //     return attrStr;
+        // }
+        function getAttr(node){
+            let attrStr = "";
+            attrStr = node.id? attrStr + '#'+node.id:attrStr;
+            if (node.className) {
+                let cls = node.className.replace(/[a-zA-Z]+\b/g, function (a) {
+                    return '.' + a;
+                });
+                attrStr = attrStr+cls;
+            }
+            return attrStr;
+        };
+        document.addEventListener('click',function(e){
+            console.log(findExactDom(e.target));
+        });
+        const tree = [
+            {
+                id: 1,
+                name: '张三',
+                children: [
+                    {
+                        id: 2,
+                        name: '李四',
+                        children: [
+                            {
+                                id: 5,
+                                name: '张五'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 6,
+                name: '玛丽'
+            }
+        ];
+        function newTree(tree) {
+            let newNode = tree.map((item, index) => {
+                if (item.children) {
+                    item.id = item.id + 1;
+                    newTree(item.children);
+                    return item;
+                } else {
+                    item.id = item.id + 1;
+                    return item;
+                }
+            })
+            return newNode;
+        }
+
+        var ss = newTree(tree);
+        console.log(ss);
+    </script>
+</html>
