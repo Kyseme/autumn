@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+
+<body>
+
+</body>
+<script>
+    function mergeSort1(arr) {
+        console.log(arr)
+        let j = arr.length;
+        if (j === 1) {
+            return arr;
+        }
+        let mid = Math.floor(j / 2);
+        let leftArr = arr.slice(0, mid);
+
+        console.log(leftArr)
+        let rightArr = arr.slice(mid, j);
+        console.log(rightArr)
+        return mergre1(mergeSort1(leftArr), mergeSort1(rightArr));
+    }
+    function mergre1(left, right) {
+        let result = [];
+        let il = 0;
+        let ir = 0;
+        while (il < left.length && ir < right.length) {
+            if (left[il] < right[ir]) {
+                result.push(left[il++]);
+            } else {
+                result.push(right[ir++]);
+            }
+        }
+        while (il < left.length) {
+            result.push(left[il++]);
+        }
+        while (ir < right.length) {
+            result.push(right[ir++]);
+        }
+        return result;
+    }
+    var arr = [6, 1, 2, 7, 9, 3, 4, 5, 10, 8];
+    // console.log(arr)
+    // mergeSort1(arr);
+    // console.log(arr)
+    function mergeSort2(arr) {
+        debugger;
+        let k = 1;
+        let temp = [];
+        temp.length = arr.length;
+        console.log(temp, arr.length)
+        while (k < arr.length) {
+            MergePass(arr, temp, k, arr.length);
+            k = k * 2;
+            MergePass(temp, arr, k, arr.length);
+            k = k * 2;
+        }
+    }
+    function MergePass(sr, temp, s, n) {
+        let i = 0;
+        let j;
+        while (i <= n - 2 * s) {
+            Merge(sr, temp, i, i + s - 1, i + 2 * s - 1);//两两归并
+            i = i + 2 * s;
+        }
+        if (i + s < n) {
+            Merge(sr, temp, i, i + s - 1, n - 1);
+        } else {
+            for (j = i; j <= n - 1; j++) {
+                temp[j] = sr[j];
+            }
+        }
+    }
+    function Merge(sr, tr, l, m, r) {
+        let i = l;
+        let j = m + 1;
+        let k = l;
+        while (i <= m && j <= r) {
+            if (sr[i] <= sr[j]) {
+                tr[k++] = sr[i++];
+            } else {
+                tr[k++] = sr[j++];
+            }
+        }
+        if (i > m) {
+            for (let q = j; q <= r; q++) {
+                tr[k++] = sr[q];
+            }
+        } else {
+            for (let q = i; q <= m; q++) {
+                tr[k++] = sr[q];
+            }
+        }
+    }
+
+    console.log(arr);
+    mergeSort2(arr)
+    console.log(arr);
+</script>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+
+<body>
+
+</body>
+<script>
+
+    // function allOrder(arr, start, len) {
+    //     if (start === len - 1)//如果已经到了数组的最后一个元素，前面的元素已经排好，输出。
+    //     {
+    //         console.log(arr.toString());
+    //         console.log('****');
+    //     }
+    //     else {
+    //         for (var i = start; i < len; i++) {
+    //             //把第一个元素分别与后面的元素进行交换，递归的调用其子数组进行排序
+    //             swap(arr,i,start);
+    //             allOrder(arr, start + 1, len);
+    //             //子数组排序返回后要将第一个元素交换回来。  
+    //             //如果不交换回来会出错，比如说第一次1、2交换，第一个位置为2，子数组排序返回后如果不将1、2
+    //             //交换回来第二次交换的时候就会将2、3交换，因此必须将1、2交换使1还是在第一个位置 
+    //             swap(arr,i, start);
+    //         }
+    //     }
+
+    // }
+    // function swap(arr,i, j) {
+    //     let temp;
+    //     temp = arr[i];
+    //     arr[i]= arr[j];
+    //     arr[j] = temp;
+    // }
+
+// 递归方法会对重复元素进行交换比如使用递归对{1，1}进行全排序会输出：
+// {1，1}，{1，1}两个重复的结果。要在排序的时候去掉重复结果，可以修改一下代码如下：
+function allOrder(arr, start, len) {
+        if (start === len - 1)//如果已经到了数组的最后一个元素，前面的元素已经排好，输出。
+        {
+            console.log(arr.toString());
+            console.log('****');
+        }
+        else {
+            for (var i = start; i < len; i++) {
+                if(i == start || arr[i]!==arr[start]){
+                    //在排列的时候进行判断如果后面的元素与start相同时就不进行排序。
+                    //这样就可以避免对重复元素进行排序
+                    swap(arr,i,start);
+                    allOrder(arr, start + 1, len);
+                    swap(arr,i, start);
+                }
+              
+            }
+        }
+
+    }
+// 一步：从右至左找第一个左邻小于右邻的数，记下位置i，值list[a]
+// 第二部：从右边往左找第一个右边大于list[a]的第一个值，记下位置j，值list[b] 
+// 第三步：交换list[a]和list[b]的值
+// 第四步：将i以后的元素重新按从小到大的顺序排列
+
+    function PermutationWithDictionary(arr) {
+        arr = arr.sort();
+        //先对数组的元素进行依次排序
+        while (true) {
+            console.log(arr.toString());
+            j = arr.length - 1;
+            index = 0;
+            for (j = arr.length - 2; j >= 0; j--) {
+                if (arr[j] < arr[j + 1]) {
+                    index = j;
+                    break;
+                    //从右向左找到第一个非递增的元素
+                }
+                else if (j == 0) {
+                    return;
+                }
+            }
+
+            for (j = arr.length - 1; j >= 0; j--) {
+                if (arr[j] > arr[index])
+                    break;
+                //从右向左找到第一个比非递增元素大的元素
+            }
+            swap(arr, index, j);
+            //交换找到的两个元素
+            Reverse(arr, index + 1);
+            //对非递增元素位置后面的数组进行逆序排列
+        }
+    }
+    function Reverse(arr, i) {
+        var k = i, j = arr.length - 1;
+        while (k < j) {
+            swap(arr, k, j);
+            k++;
+            j--;
+        }
+    }
+
+    function swap(arr,i, j) {
+        let temp;
+        temp = arr[i];
+        arr[i]= arr[j];
+        arr[j] = temp;
+    }
+    var arr = [1, 3, 3];
+    allOrder(arr, 0, 3);
+    PermutationWithDictionary(arr);
+</script>
+
+</html>

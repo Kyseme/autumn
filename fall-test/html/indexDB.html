@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+<body>
+    <h1>
+        IndexedDB 基本语法
+    </h1>
+</body>
+<script>
+    const request = window.indexedDB.open('sunine');
+    var db;
+
+    request.onerror = function(err){
+        console.log(err);
+    }
+    request.onsuccess = function(data){
+        console.log(data)
+    }
+    //第一件事是新建对象仓库
+    request.onupgradeneeded = function(e){
+        db = e.target.result;
+        //新增一张叫做person的表格，主键是id
+        var objectStore;
+        if(!db.objectStoreNames.contains('person')){
+            objectStore = db.createObjectStore('person',{keyPath:'id'});
+        }
+        addData(db,'person',[{id:1,name:'hello'}]);
+    }
+    
+    function addData(db,storename,data){
+        const store = db.transaction(storename, 'readwrite').objectStore(storename)
+        for(let i = 0; i < data.length; i++) {
+            const request = store.add(data[i])
+            request.onerror = function() {
+                console.error('添加数据失败')
+            }
+            request.onsuccess = function() {
+                console.log('添加数据成功')
+            }
+        }
+    }
+    function putData(db, storename, data){
+        const store = store = db.transaction(storename, 'readwrite').objectStore(storename)
+        for(let i = 0; i < data.length; i++) {
+            const request = store.put(data[i])
+            request.onerror = function() {
+                console.error('修改数据失败')
+            }
+            request.onsuccess = function() {
+                console.log('修改数据成功')
+            }
+        }
+    }
+    function getData(db, storename, key){
+        const store = store = db.transaction(storename, 'readwrite').objectStore(storename)
+	    const request = store.get(key)
+        request.onerror = function() {
+            console.error('获取数据失败')
+        }
+        request.onsuccess = function(e) {
+            const result = e.target.result
+            console.log(result)
+        }
+    }
+    function deleteDate(db, storename, key) {
+        const store = store = db.transaction(storename, 'readwrite').objectStore(storename)
+        store.delete(key)
+        console.log('已删除存储空间' + storename + '中的' + key + '纪录')
+    }
+
+
+</script>
+</html>
