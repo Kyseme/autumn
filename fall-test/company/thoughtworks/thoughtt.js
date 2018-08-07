@@ -1,17 +1,17 @@
-const readline = require('readline');
+// const readline = require('readline');
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
-rl.on('line', (input) => {
-    console.log(`接收到：${input}`);
-});
-rl.on('SIGINT', () => {
-    rl.question('确定要退出吗？ ', (answer) => {
-      if (answer.match(/^y(es)?$/i)) rl.pause();
-    });
-});
+// const rl = readline.createInterface({
+//   input: process.stdin,
+//   output: process.stdout
+// });
+// rl.on('line', (input) => {
+//     console.log(`接收到：${input}`);
+// });
+// rl.on('SIGINT', () => {
+//     rl.question('确定要退出吗？ ', (answer) => {
+//       if (answer.match(/^y(es)?$/i)) rl.pause();
+//     });
+// });
 
 var s1 = '3 3';
 var s2 = '0,1 0,2;0,0 1,0;0,1 1,1;0,2 1,2;1,0 1,1;1,1 1,2;1,1 2,1;1,2 2,2;2,0 2,1';
@@ -92,8 +92,17 @@ function isValid(s1,s2){
 }
 
 //检查是否为数字
-function checkNum(num){
-    if(isNaN(num)){
+// function checkNum(num){
+//     if(isNaN(num)){
+//         console.log('Invalid number format');
+//         return false;
+//     }
+//     return true;
+// }
+function checkNum(num) {
+    let reg = /^[0-9]*$/;
+    console.log(num)
+    if (!reg.test(num)) {
         console.log('Invalid number format');
         return false;
     }

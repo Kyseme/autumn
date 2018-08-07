@@ -8,26 +8,49 @@ const rl = readline.createInterface({
 var i = 0;
 var s1
 var s2;
-var s1s, s2s;
+var s3,s4;
+var s1s, s2s,x,y;
 rl.on('line', (input) => {
     if(i===0){
         s1 = input.trim();
+        let s1Arr = s1.split(' ');
+        if(s1Arr.length!==2){
+            console.log('Number out of range ');
+            rl.close();
+        }
+        let reg = /^[0-9]*[1-9][0-9]*$/;
+        for(let t of s1Arr){
+            if(!reg.test(t)){
+                console.log('Invalid number format');
+                rl.close();
+            }
+        }
     }
     if(i===1){
         s2 = input.trim();
         s1s = s1.split(' ');
         s2s = s2.split(';');
+    }
+    if(i===2){
+        let ss = input.trim().split(' ');
+        // console.log(ss);
+        s3 = ss[0].split(',');
+        s4 = ss[1];
+        console.log(s3,s4);
+        x = s3[0];
+        y = s3[1];
+        x = 2*x+1;
+        y = 2*y+1;
+        renderGrid(s1s, s2s,x,y,s4);
         rl.close();
-
     }
     i++;
    
 });
-rl.on('close', () => {
-    renderGrid(s1s, s2s);
-});
+// rl.on('close', () => {
+// });
 
-function renderGrid(s1s, s2s) {
+function renderGrid(s1s, s2s,x,y,s4) {
     if (!isValid(s1s, s2s)) {
         return;
     }
@@ -51,6 +74,52 @@ function renderGrid(s1s, s2s) {
             x > x1 ? arr[x1 + 1][y1] = '[R]' : arr[x + 1][y] = '[R]';
         }
     }
+   
+    let s4Arr = s4.split('');
+    x = parseInt(x);
+    y = parseInt(y);
+    console.log(x,y);
+    console.log(s4Arr);
+    for(let t of s4Arr){
+        console.log(x,y);
+        if(t=='W'){//
+            --x;
+            if(!checkIsWall(x,y,arr)){
+                ++x;
+                arr[x][y] = '[*]';
+                printArr(arr);
+                return;
+            }
+        }
+        if(t=='S'){
+            ++x;
+            if(!checkIsWall(x,y,arr)){
+                --x;
+                arr[x][y] = '[*]';
+                printArr(arr);
+                return;
+            }
+        }
+        if(t=='A'){
+            --y;
+            if(!checkIsWall(x,y,arr)){
+                ++y;
+                arr[x][y] = '[*]';
+                printArr(arr);
+               return;
+            }
+        }
+        if(t=='D'){
+            ++y;
+            if(!checkIsWall(x,y,arr)){
+                --y;
+                arr[x][y] = '[*]';
+                printArr(arr);
+                return;
+            }
+        }
+    }
+    arr[x][y] = '[*]';
     printArr(arr);
 }
 
@@ -66,9 +135,11 @@ function printArr(arr) {
 }
 
 function isValid(s1, s2) {
-    for (let ss1 of s1) {
-        if (!checkNum(ss1)) return false;
-    }
+    // for (let ss1 of s1) {
+    //     if (!checkNum(ss1)) return false;
+    // }
+    // console.log(s1);
+    // console.log(s2);
     let n = parseInt(s1[0]);
     let m = parseInt(s1[1]);
     for (let item of s2) {
@@ -107,9 +178,17 @@ function initArr(n, m, k, h) {
     }
     return arr;
 }
+
+function checkIsWall(x,y,arr){
+    if(arr[x][y]=='W'){
+        return false;
+    }
+    return true;
+}
 //检查是否为数字
 function checkNum(num) {
-    if (isNaN(num)) {
+    let reg = /^[0-9]*$/;
+    if (!reg.test(num)) {
         console.log('Invalid number format');
         return false;
     }

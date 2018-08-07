@@ -207,5 +207,7 @@ HTTP/1.1 规范定义了如下47中首部字段
 
 
 ### 用过cookie吗？如何修改cookie，除了js方法还有什么方法
+document.cookie='name=sun';
 
 ### cookie有哪些参数，cookie的本质时什么，如果让你封装一个cookie怎么实现？
+
