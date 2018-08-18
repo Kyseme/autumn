@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var n = 3;
+var arr = [[[1,10],[32,45]],[[78,94],[5,16]],[[80,100],[200,220],[16,32]]];
+// var arr = [[{s:1,t:10},{s:32,t:45}],[{s:78,t:94},{s:5,t:16}],[{s:80,t:100},{s:200,t:220},{s:16,t:32}]];
+function mergeArr(n,arr){
+    if(arr==null || arr.length<=0){
+        return;
+    }
+    let result = [];
+    for(let i=0;i<n;i++){
+        for(let j=0;j<arr[i].length;j++){
+            console.log(arr[i][j])
+            debugger;
+            findCommon(result,arr[i][j]);
+        }
+    }
+    console.log(result);
+}
+mergeArr(3,arr);
+
+function findCommon(result,num){
+    console.log(result)
+   
+    for(let i =0;i<result.length;i++){
+        if(result[i][0]>num[1] || result[i][1]<num[0]){
+            result.push(num);
+            return;
+        }else if(result[i][0]<num[0] && result[i][1]>num[1]){
+            return;
+        }else if(result[i][0]>num[0] && result[i][1]<num[1]){
+            result[i] = num;
+            return;
+        }else if(result[i][0]<num[0] && result[i][1]<num[1]){
+            result[i][1] = num[1];
+            return;
+        }else if(result[i][0]>num[0] && result[i][1]>num[1]){
+            result[i][0] = num[0];
+            return;
+        }
+    }
+    if(result.length==0){
+        result.push(num);
+    }
+}
+
+</script>
+</html>

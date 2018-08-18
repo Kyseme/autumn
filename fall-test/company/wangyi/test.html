@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var str = '111101111'
+console.log(find01Str(str));
+function find01Str(str){
+
+    if(str==null||str.length<=0){
+        return 0;
+    }
+
+    var result = [];
+    var start = str[0];
+    var index = 0;
+    while(index<str.length){
+        debugger;
+        if(str[index]!=str[++index]){
+            var count = 2;
+            while(str[index]!=str[++index] && index<str.length){
+                ++count;
+            }
+            result.push(count);  
+        }
+    }
+    let res = result[0];
+    for(let i=1;i<result.length;i++){
+        if(res<result[i]){
+          res = result[i];
+        }
+    }
+    console.log(res);
+    return res;
+}
+</script>
+</html>

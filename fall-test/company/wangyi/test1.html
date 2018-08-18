@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var m = 3,n=2,arr=[5,8,5];
+findMinOption(m,n,arr)
+function findMinOption(m,n,arr){
+    let count = 0;
+    let maxIndex = 0;
+    let minIndex =0;
+    let result = [];
+    debugger
+    while(count<=2){
+        let temp = findMin(arr);
+        minIndex = temp[0];
+        maxIndex = temp[1];
+        if(arr[maxIndex]>arr[minIndex]){
+            arr[maxIndex] = arr[maxIndex] -1;
+            arr[minIndex] = arr[minIndex] +1;
+            ++count;
+            let tt = [maxIndex,minIndex,1];
+            result.push(tt);            
+        }
+        if(arr[maxIndex]==arr[minIndex]){
+            result.shift([0,count]);
+            console.log(result)
+            return result;
+        }
+    }
+    let rs = findMin(arr);
+    let dp = temp[1] - temp[0];
+    result.shif([dp,n]);
+    return result;
+    
+}
+function findMin(arr){
+    let min = arr[0];
+    let max = arr[0];
+    let minIndex = 0;
+    let maxIndex = 0;
+    for(let i =1;i<arr.length;i++){
+        if(min>arr[i]){
+            min = arr[i];
+            minIndex = i;
+        }
+        if(max<arr[i]){
+            max = arr[i];
+            maxIndex = i;
+        }
+    }
+    return [minIndex,maxIndex];
+}
+</script>
+</html>
