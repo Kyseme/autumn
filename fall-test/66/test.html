@@ -10,48 +10,29 @@
     
 </body>
 <script>
- var arr = [3, 32, 321];
-    function PrintMinNumber(numbers) {
-        let end = numbers.length - 1;
-        return quickSort(numbers, 0, end);
-    }
-    console.log(PrintMinNumber(arr));
-    function quickSort(arr, start, end) {
-        debugger;
-        if (start < end) {
-            var temp = arr[start];
-            let i = start;
-            let j = end;
-            while (i < j) {
-                while (compare(arr[j], temp) && i < j) {
-                    j--;
-                }
-                while (compare(temp, arr[i]) && i < j) {
-                    i++;
-                }
-                if (i < j) {
-                    let temp = arr[i];
-                    arr[i] = arr[j];
-                    arr[j] = temp;
-                }
+var data = [1,2,3,3,3,3,4,5];
+var k = 3;
+console.log(findLastNum(data,0,8,3));
+ function findLastNum(data,start,end,k){
+    let mid,midNum;
+    debugger
+    while(start<end){
+        mid = Math.floor((start+end)/2);
+        console.log(mid)
+        midNum = data[mid];
+        if(midNum==k){
+            if((mid<data.length-1 && data[mid+1]!=k)|| mid==data.length-1){
+                return mid;
+            }else{
+                start = mid +1;
             }
-            arr[start] = arr[i];
-            arr[i] = temp;
-            quickSort(arr, start, i - 1);
-            quickSort(arr, i + 1, end);
-        } else {
-            return arr;
+        }else if(midNum>k){
+            end = mid-1;
+        }else{
+            start = mid+1;
         }
-
     }
-
-    function compare(s1, s2) {
-        if (s1 == null || s2 == null) {
-            throw new Error('数组为空')
-        }
-        var ss1 = s1.toString() + s2.toString();
-        var ss2 = s2.toString() + s1.toString();
-        return ss1 >= ss2;
-    }
+    return -1;
+}
 </script>
 </html>

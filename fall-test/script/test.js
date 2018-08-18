@@ -1,16 +1,8 @@
-console.log('sunine');
+function log(){
+    var args = Array.prototype.slice.call(arguments);
 
-var index = 2;
-
-function add(){
-    index++;
-
-    format(index);
+    args.unshift('(app)');
+    console.log.apply(console,args);
 }
-function format(index){
-    let width = index*3;
-    this.index = 12;
-    console.log(index)
-}
-add();
-console.log(index);
+
+log('hello','word');
