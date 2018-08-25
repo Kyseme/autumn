@@ -11,13 +11,39 @@
  /**
   * 1. 数组排序    2. 统计数组中0的个数  3.统计排序之后的数组相邻数字之间的空缺总数
   */
-
+var num = [1,3,0,0,5];
+console.log(IsContinuous(num));
 function IsContinuous(numbers)
 {
     if(numbers == null || numbers.length<1){
         return false;
     }
     numbers = numbers.sort();
+    console.log(numbers)
     let numberOfZero = 0;
     let numberOfGap = 0;
+
+    //统计数据中0的个数
+    for(let i=0;i<numbers.length;i++){
+        if(numbers[i]==0){
+            ++numberOfZero;
+        }else{
+            break;
+        }
+    }
+    console.log(numberOfZero)
+    //统计数组中的间隔数目
+    let small = numberOfZero;
+    let big = small+1;
+    while(big<numbers.length){
+        //两个数字相等，有对子，不可能是顺子
+        if(numbers[small]==numbers[big]){
+            return false;
+        }
+        numberOfGap = numbers[big]-numbers[small]-1 +numberOfGap;
+        small = big;
+        ++big;
+    }
+    console.log(numberOfGap)
+    return numberOfGap>numberOfZero?false:true;
 }
