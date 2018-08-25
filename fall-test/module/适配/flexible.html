@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    hello
+</body>
+<script>
+    (function flexible(window,document){
+    var docEl = document.documentElement;
+    var dpr = window.devicePixelRatio || 1;
+    function setBodyFontSize(){
+        if(document.body){
+            document.body.style.fontSize = (12*dpr) + 'px';
+        }else{
+            document.addEventListener('DOMContentLoaded',setBodyFontSize)
+        }
+    }
+    setBodyFontSize();
+    //set 1rem = viewWith/10;
+    function setRemUnit(){
+        var rem = docEl.clientWidth/10;
+        docEl.style.fontSize = rem + 'px';
+        console.log(docEl.style.fontSize);
+    }
+    setRemUnit();
+    //reset rem unit on page resize
+    window.addEventListener('resize',setRemUnit);
+    window.addEventListener('pageshow',function(e){
+        if(e.persisted){
+            setRemUnit();
+        }
+    })
+}(window,document))
+</script>
+</html>

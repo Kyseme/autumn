@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    hello
+</body>
+<script>
+     !(function(doc,win){
+        var docEle = doc.documentElement;
+        var evt = "onorientationchange" in window ? "orientationchange" : "resize";
+        var fn = function(){
+            var width = docEle.clientWidth;
+            width &&(docEle.style.fontSize= 100*(width/640)+'px');
+            console.log(docEle.style.fontSize);
+        }
+        win.addEventListener(evt,fn,false);
+        doc.addEventListener('DOMContentLoaded',fn,false);
+    }(document,window))
+</script>
+</html>
