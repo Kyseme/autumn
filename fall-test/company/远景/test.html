@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+<body>
+    
+</body>
+<script>
+    function generate(n) {
+            if (n === 1) return ['()'];
+            let res = new Set();
+            let p = generate(n - 1);
+            for (let i = 0; i < p.length; i++) {
+                res.add('()' + p[i]);
+                for (let j = 0; j < p[i].length; j++) {
+                    if (p[i][j] === '(') {
+                        res.add(p[i].slice(0, j + 1) + '()' + p[i].slice(j + 1));
+                    }
+                }
+            }
+            return [...res];
+        }
+console.log(generate(2));
+</script>
+</html>
