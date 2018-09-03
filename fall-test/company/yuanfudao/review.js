@@ -82,8 +82,6 @@ function TreeBread(pRoot){
     while(results.length>0){
         cur = 0;
         last = results.length;
-        cur = 0;
-        last = results.length;
         while(cur<last){
             current = results.pop();
             cur++;
