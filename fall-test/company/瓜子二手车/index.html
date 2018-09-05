@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        ul li {
+            float:left;
+            height:30px;
+            width:30px;
+            box-sizing: border-box;
+            line-height: 30px;
+            text-align: center;
+            transition:left 4s;
+        }
+        ul{
+            list-style:none;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <ul>
+            <li>5</li>
+            <li>8</li>
+            <li>2</li>
+            <li>7</li>
+            <li>1</li>
+            <li>9</li>
+        </ul>
+    </div>
+</body>
+<script>
+    var liDom = document.querySelectorAll('li');
+    for(var i =0 ;i<liDom.length;i++){
+        for(var j=0;j<liDom.length-1;j++){
+            if(+liDom[j].innerText > +liDom[j+1].innerText){
+                liDom[j].style.left = 30 + 'px';
+                liDom[j+1].style.left = -30 + 'px';
+            }
+        }
+    }
+</script>
+</html>

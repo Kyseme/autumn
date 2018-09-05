@@ -43,13 +43,13 @@ class Targetobj{
 }
 
 let targetO = new Targetobj(1, 'Martin');
-let observerProxy = new Proxy(targetO,{
-    set(target, property, value, reciever) {
-        if (property === 'name') {
-            observer(target[property], value);
-        }
+// let observerProxy = new Proxy(targetO,{
+//     set(target, property, value, reciever) {
+//         if (property === 'name') {
+//             observer(target[property], value);
+//         }
 
-        Reflect.set(target, property, value, reciever);
-    }
-});
-observerProxy.name = 'Lucas';
+//         Reflect.set(target, property, value, reciever);
+//     }
+// });
+// observerProxy.name = 'Lucas';
