@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+
+<body>
+    <script>
+        var ob = {
+            'a': 1,
+            'b[0]': 1,
+            'b[1]': 2,
+            'b[2].c': true,
+            'b[3][0]': 3,
+            'b[4][0]': {},
+            'd.e': 2,
+            'd.f': 3
+        };
+        console.log(unflattern(ob));
+        function unflattern(obj) {
+                //当不是对象时
+                if (Object(obj) !== obj || Array.isArray(obj)) {
+                    return data;
+                }
+                var regex = /\.?([a-z])|\[(\d+)\]/g;
+                var result = {};
+                for (let p in obj) {
+                    let cur = result;
+                    let prop = "";
+                    let m;
+                    while (m = regex.exec(p)) {
+                        cur = cur[prop] || (cur[prop] = (m[2] ? [] : {}));
+                        prop = m[2] || m[1];
+                    }
+                    cur[prop] = obj[p];
+                }
+                console.log(result);
+                return result[""] || result;
+            }
+    </script>
+</body>
+
+</html>

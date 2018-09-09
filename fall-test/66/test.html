@@ -10,71 +10,41 @@
     
 </body>
 <script>
-function TreeNode(x) {
-    this.val = x;
-    this.left = null;
-    this.right = null;
-}
-var eight = new TreeNode(8);
-var sixL = new TreeNode(6);
-var sixR = new TreeNode(6);
-var fiveL = new TreeNode(5);
-var fiveR = new TreeNode(5);
-var sevenL = new TreeNode(7);
-var sevenR = new TreeNode(7);
-sixL.left = fiveL;
-sixL.right = sevenL;
-sixR.left = sevenR;
-sixR.right = fiveR;
-eight.right = sixR;
-eight.left = sixL;
-// console.log(eight);
-Print(eight);
-function Print(pRoot)
-{
-    if(pRoot ==null){
-        return;
-    }
-    var layer = 1;
-    var s1 = [];    //s1存奇数层节点
-    var s2 = [];    //s2存偶数层节点
-    var list = [];
-    s1.push(pRoot);
-    while(s1.length>0 || s2.length>0){
-        if(layer%2!=0){
-            let temp = [];
-            while(s1.length>0){
-                let node = s1.shift();
-                if(node!=null){
-                    temp.push(node.val);
-                    s2.push(node.left);
-                    s2.push(node.right);
+    var str = "ABCESFCSADEE", rows = 3, cols = 4, path = "ABCCED";
+        console.log(hasPath(str, rows, cols, path));
+        function hasPath(matrix, rows, cols, path) {
+            debugger;
+            if (matrix == null || matrix.length == 0 || path == null || path.length == 0 || rows <= 0 || cols <= 0 || rows * cols < path.length) {
+                return false;
+            }
+            var flags = [];
+            flags.length = rows * cols;
+            flags.fill(false);
+            var pathLength = 0;
+            for (let i = 0; i < rows; i++) {
+                for (let j = 0; j < cols; j++) {
+                    if (hasPathCore(matrix, rows, cols, path, i, j, flags, pathLength)) {
+                        return true;
+                    }
                 }
             }
-            if(temp.length>0){
-                list = list.concat(temp);
-                layer++;
-            }
-
-        
-        }else{
-            let temp = [];
-            while(s2.length>0){
-                let node = s2.shift();
-                if(node!=null){
-                    temp.push(node.val);
-                    s1.push(node.left);
-                    s1.push(node.right);
-                }
-            }
-            if(temp.length>0){
-                list = list.concat(temp);
-                layer++;
-            }
+            return false;
         }
-    }
-    console.log(list);
-}
 
+        function hasPathCore(matrix, rows, cols, path, i, j, flags, pathLength) {
+            let flag = false;
+            if (pathLength == path.length) return true;
+            if (i >= 0 && i < rows && j >= 0 && j < cols && !flags[i * cols + j] && matrix(i * cols + j) == path[pathLength]) {
+                pathLength++;
+                flags[i * cols + j] = true;
+                flag = hasPath(matrix, rows, cols, path, i, j + 1, flags, pathLength) || hasPath(matrix, rows, cols, path, i + 1, j, flags, pathLength) || hasPath(matrix, rows, cols, path, i - 1, j, flags, pathLength) || hasPath(matrix, rows, cols, path, i, j - 1, flags, pathLength);
+
+                if (!flag) {
+                    pathLength--;
+                    flags[i * rows + j] = false;
+                }
+            }
+            return flag;
+        }
 </script>
 </html>

@@ -1,16 +1,16 @@
 
-var lines = readline().split(',');
-var m = parseInt(lines[0])
-var n = parseInt(lines[1]);
-var temp ;
-var ans = [];
-for(var i = 0;i < m; i++){
-    temp = readline().split(",")
-    for(var j = 0;j < n; j++){
-        ans += parseInt(temp[j]);
-    }
-}
-print(ans);
+// var lines = readline().split(',');
+// var m = parseInt(lines[0])
+// var n = parseInt(lines[1]);
+// var temp ;
+// var ans = [];
+// for(var i = 0;i < m; i++){
+//     temp = readline().split(",")
+//     for(var j = 0;j < n; j++){
+//         ans += parseInt(temp[j]);
+//     }
+// }
+// print(ans);
 
 function getGroup(m,n,arr){
     if(arr==null||arr.length<=0){

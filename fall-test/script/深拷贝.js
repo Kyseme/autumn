@@ -1,3 +1,5 @@
+
+//深拷贝
 function deepCopy(obj){
     if(typeof obj == 'function'){
         return new Function('return '+obj.toString())();

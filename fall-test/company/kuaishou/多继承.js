@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script> -->
-</head>
-<body>
-    
-</body>
-<script>
-   //继承minxin
+//继承minxin
 //Object.getOwnPropertyNames()方法返回一个由指定对象的所有自身属性的属性名（包括不可枚举属性但不包括Symbol值作为名称的属性）组成的数组
 //该方法不会获取到原型链上的属性：
 const mixinProps = (target, source) => {
@@ -115,9 +101,6 @@ function ChildTwo(){
 ChildTwo.prototype.print = function(){
     console.log('red');
 }
-debugger;
 var Parent = createClass([childOne,ChildTwo]);
 var parent = new Parent();
 parent.sayName();
-</script>
-</html>
