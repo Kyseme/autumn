@@ -1,0 +1,78 @@
+记录秋招猿辅导面试，前端，二面
+
+一面(内推的，北京打的电话电话面)
+1. 介绍一下react的生命周期
+2. react如果进行组建的通信，我当时回答父子间通过props将数据传递给子组件，子组件传递给父组件是通过回调函数，面试官问有没有其他的，我说有redux，但是我项目中没有用redux
+3.介绍一下redux是的原理，我就围绕store,action,reducer简单说了一下
+4.说一下react如何提高渲染速度，我提到了pureComponet和shouldComponent()
+5.介绍一下react的diff算法
+6.介绍一下Angular如何实现双向数据绑定(之前实习有用到)
+7.介绍一下Angular的一些特点，我说到了控制器和指令标签
+8.说一下rem和em的区别？vh和vh的区别？这个是viewport的百分比高宽度
+9.自己在实习中有没有遇到什么问题？
+10.介绍一下http头部中和缓存有关的字段？我说了Cache-Control:max-age=xxx,expire=xxx;ETag:xxx,Last-Modified:xxx;
+11.如何优化网络的访问速度
+12.给一个题目现场编程
+const obj = { 
+
+ id: 1, 
+
+ arr: [1,2,3], 
+
+ innerObj: { id: 1, value: 2 }, 
+
+ objArr: [{ id: 2, value: 4 }, { id: 3, value: 6 }] 
+
+} 
+
+getValue(obj, "id")  // 1 
+
+getValue(obj, "arr0")  // 1 
+
+getValue(obj, "objArr1.id")  // 3 
+  
+  
+  
+  
+二面（现场面，武汉） 
+进去面试官就说面试45分钟
+1.专业学些什么课程？我是非计算机专业
+2.对数据结构熟悉情况怎么样？
+3.一道编程题，一个迷宫，能走通的标记为0，走不通的标记为1，现在给你定一个起点Q(i,j)如何使Q以最小路径走出来，
+我说我先实现能走出来走多少步，面试官说可以
+function getPath(arr,x,y){
+    var path = [];
+    let len1 = arr.length;
+    let len2 = arr[0].length;
+    for(let i=0;i<len1;i++){
+        path[i] = [];
+        for(let j=0;j<len2;j++){
+            if(arr[i][j] == 0){
+                path[i][j] = false;
+            }else{
+                path[i][j] = true;
+            }
+        }
+    }
+    getCount(arr,x,y,len1,len2,path,0)
+}
+
+function getCount(arr,x,y,len1,len2,path,count){
+    if(x==0 || y==0|| x==len1-1 || y==len-1) return count;
+    let dx = [1,0,-1,0];
+    let dy = [0,1,0,-1];
+    if(arr[x][y]==0 && !path[x][y]){
+        for(let i=0;i<4;i++){
+            let ti = x + dx[i];
+            let tj = y + dy[i];
+            if(ti>=0 && ti<len1 && tj>=0 && tj<len2 && arr[ti][tj]==0){
+                count ++;
+                path[x][y] = true;
+                x = ti;
+                y = tj;
+                getCount(arr,x,y,len1,len2,path,count);
+            }
+        }
+    }
+}
+望各位大佬指正
