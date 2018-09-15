@@ -20,7 +20,7 @@ function getMaxStr(str) {
             if(i-j<2){
                 dp[j][i] = (str[i]==str[j]);
             }else{
-                dp[j][i] = ((str[i]==str[j])&&dp[j+1][i-1]);
+                dp[j][i] = ((str[i]==str[j])&&dp[j+1][i-1]); 
             }
             if(dp[j][i]&&maxlen<(i-j+1)){
                 maxlen = i-j+1;

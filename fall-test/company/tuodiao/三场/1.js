@@ -14,7 +14,7 @@
 //     }
 // }
 // print(ans);
-console.log(getStrLength('abcabcbbb'));
+// console.log(getStrLength('abcabcbbb'));
 function getStrLength(str){
     if(str == null || str.length <=0) return 0;
     // var obj = {};
@@ -38,7 +38,8 @@ function getStrLength(str){
     // }
     return arr.length;
 }
-
+var str = 'aebcabd';
+console.log(getStrLength(str));
 function getStrLength(str){
     var map = {};
     var left = 0;
