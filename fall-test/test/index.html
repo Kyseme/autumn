@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script> -->
+</head>
+<body>
+    
+</body>
+<script>
+var arr = [1,[2,[3,[4]]]];
+
+flat(arr);
+function flat(arr){
+    var temp = [];
+    debugger
+    for(let i=0;i<arr.length;i++){
+        if(Object.prototype.toString.call(arr[i])=='[object Array]'){
+            temp = temp.concat(arr[i]);
+        }else{
+            temp.push(arr[i]);
+        }
+    }
+    return temp;
+}
+</script>
+</html>

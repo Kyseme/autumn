@@ -31,7 +31,7 @@ function breadthSearch(root) {
 }
 
 
-function depthSearch(root){
+function breadthSearch2(root){
     if(root==null){
         return;
     }
@@ -51,6 +51,20 @@ function depthSearch(root){
         }
     }
 }
+
+function depthSearch(root){
+    if(root == null) return 0;
+    if(root.left!=null){
+        left = depthSearch(root.left);
+    }
+    if(root.right!=null){
+        right = depthSearch(root.right);
+    }
+    return Math.max(left+1,right+1);
+}
+
+
+
 function TreeNode(x) {
     this.val = x;
     this.left = null;
