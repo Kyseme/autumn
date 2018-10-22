@@ -1,0 +1,19 @@
+<html>
+
+<script>
+var Sub = function(initValue) {
+   this.initValue = initValue;
+   this.add = function(val){
+        if(typeof val === 'number'){
+            this.initValue = this.initValue+val;
+            return this;
+        }
+   };
+   this.getResult = function(){
+         console.log(this.initValue);
+   };
+};
+var sub = new Sub(5);
+sub.add(9).add(4).getResult();
+</script>
+</html>
